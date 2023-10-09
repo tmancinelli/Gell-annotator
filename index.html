@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+
+    <title>Gell annotator</title>
+  </head>
+
+  <body>
+
+    <!-- First page: Welcome! -->
+    <div class="container page">
+
+      <div class="row justify-content-md-center">
+        <h1>Welcome to the Gell annotator</h1>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <p>This page will drive you to the generation of a XML/TEI document to map an area of the Gell manuscript.</p>
+        Use the output of this tool to complete the annotation using an XML editor such as oXygen, VSStudio or VIm.</p>
+        <p>Your XML document, together with all the others from your collegues will map the entire Gell manuscript.</p>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <button type="button" class="btn btn-primary disabled"
+                id="startingButton" data-ready="Let's start" onclick="nextPage('choosePage');">Please, wait...</button>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <p>Refresh the page to start from scratch.</p>
+      </div>
+    </div>
+
+    <!-- Second page: choose the page -->
+    <div class="container page hidden" id="choosePage">
+
+      <div class="row justify-content-md-center">
+        <h1>Choose the page you want to work on.</h1>
+      </div>
+
+    </div>
+
+    <!-- Third page: choose the zone -->
+    <div class="container page hidden" id="zonePage">
+
+      <div class="row justify-content-md-center">
+        <h1>Choose the area you would like to work on.</h1>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <p>Click on the image to add points. Then, unify them using the green button. Use the orange button to reset the selection.</p>
+      </div>
+
+      <div class="row justify-content-md-center card">
+        <canvas class="card-img-top" id="bigImage" height="800" width="800"
+                onclick="zoneClick(event)"></canvas>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-warning"
+                  id="startingButton" onclick="zoneReset()">Reset</button>
+          <button type="button" class="btn btn-success"
+                  id="startingButton" onclick="zoneUnify()">Unify</button>
+          <button type="button" class="btn btn-primary"
+                  id="startingButton" onclick="zoneDone()">Continue</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4th page: the form -->
+    <div class="container page hidden" id="formPage">
+
+      <div class="row justify-content-md-center">
+        <h1>Tell me something about yourself.</h1>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <form>
+          <div class="form-group">
+            <label for="formFolio">Folio</label>
+            <select class="form-control" id="formFolio">
+              <option>Recto</option>
+              <option>Verso</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="formName">Firstname</label>
+            <input class="form-control" id="formName" />
+          </div>
+          <div class="form-group">
+            <label for="formSurname">Lastname</label>
+            <input class="form-control" id="formSurname" />
+          </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <button type="button" class="btn btn-primary"
+                onclick="teiGenerator()">Continue</button>
+      </div>
+    </div>
+
+    <!-- 5th page: TEI -->
+    <div class="container page hidden" id="teiPage">
+
+      <div class="row justify-content-md-center">
+        <h1>Thank you!</h1>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <p>The XML document will be avaiable soon in download. Save and edit it.</p>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <h3>Good luck!</h3>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
