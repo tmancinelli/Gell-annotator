@@ -77,47 +77,24 @@
     <div class="container page hidden" id="formPage">
 
       <div class="row justify-content-md-center">
-        <h1>Tell me something about yourself.</h1>
+        <h1>Operation completed!</h1>
       </div>
 
       <div class="row justify-content-md-center">
         <form>
           <div class="form-group">
-            <label for="formFolio">Folio</label>
-            <select class="form-control" id="formFolio">
-              <option>Recto</option>
-              <option>Verso</option>
-            </select>
+            <label for="formPageId">Page ID</label>
+            <input class="form-control" readonly id="formPageId" />
           </div>
           <div class="form-group">
-            <label for="formName">Firstname</label>
-            <input class="form-control" id="formName" />
+            <label for="formZoneId">Zone ID</label>
+            <input class="form-control" readonly id="formZoneId" />
           </div>
           <div class="form-group">
-            <label for="formSurname">Lastname</label>
-            <input class="form-control" id="formSurname" />
+            <label for="formZone">Zone</label>
+            <textarea class="form-control" id="formZone"></textarea>
           </div>
-      </div>
-
-      <div class="row justify-content-md-center">
-        <button type="button" class="btn btn-primary"
-                onclick="teiGenerator()">Continue</button>
-      </div>
-    </div>
-
-    <!-- 5th page: TEI -->
-    <div class="container page hidden" id="teiPage">
-
-      <div class="row justify-content-md-center">
-        <h1>Thank you!</h1>
-      </div>
-
-      <div class="row justify-content-md-center">
-        <p>The XML document will be avaiable soon in download. Save and edit it.</p>
-      </div>
-
-      <div class="row justify-content-md-center">
-        <h3>Good luck!</h3>
+        </form>
       </div>
     </div>
 

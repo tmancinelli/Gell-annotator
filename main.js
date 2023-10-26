@@ -192,24 +192,6 @@ function zoneDone() {
     return;
   }
 
-  nextPage("formPage");
-}
-
-function teiGenerator() {
-  if ($("#formName").val().length == 0) {
-    alert("Non hai inserito il tuo nome.");
-    return;
-  }
-
-  if ($("#formSurname").val().length == 0) {
-    alert("Non hai inserito il tuo cognome.");
-    return;
-  }
-
-  nextPage("teiPage");
-
-  let fileName = teiGeneratorFileName();
-
   fetch("template.xml")
   .then(response => {
     return response.text();
@@ -224,40 +206,27 @@ function teiGenerator() {
     let points = gMarkers.map(marker => normalizeValue(data, marker.x, marker.y).join(",")).join(" ")
     text = text.replace(/TEMPLATE_IMAGE_POINTS/g, points);
 
-    // type.
-    text = text.replace(/TEMPLATE_TYPE/g, $("#formType").val());
-
-    // name and surname.
-    text = text.replace(/TEMPLATE_NAME/g, $("#formName").val());
-    text = text.replace(/TEMPLATE_SURNAME/g, $("#formSurname").val());
-
-    // zone id.
+    // IDs.
+    text = text.replace(/TEMPLATE_PAGE_ID/g, teiGeneratorPageId());
     text = text.replace(/TEMPLATE_ZONE_ID/g, teiGeneratorZoneId());
 
     return text;
   })
   .then(tei => {
-    // Let's create a blob containing the TEI document.
-    let blob = new Blob([tei], {type: "octet/stream"});
+    $("#formZoneId").val(teiGeneratorZoneId());
+    $("#formPageId").val(teiGeneratorPageId());
+    $("#formZone").val(tei);
 
-    // From the blob, we can create a URL.
-    let url = URL.createObjectURL(blob);
-
-    // In order to start the downloading, we need an <a> element.
-    let a = $("<a>", {class: "hidden", href: url, download: fileName });
-    $("body").append(a);
-
-    // Let's simulate the click.
-    a[0].click();
+    nextPage("formPage");
   });
 }
 
-function teiGeneratorFileName() {
-  return teiGeneratorZoneId() + ".xml";
+function teiGeneratorZoneId() {
+  return teiGeneratorPageId() + "_" + crypto.randomUUID();
 }
 
-function teiGeneratorZoneId() {
-  return "zone_" + gData[gPosition].label + "_" + $("#formFolio").val() + "_" + $("#formType").val();
+function teiGeneratorPageId() {
+  return ("zone_" + gData[gPosition].label).replace(/ /g, "_");
 }
 
 function normalizeValue(data, x, y) {
