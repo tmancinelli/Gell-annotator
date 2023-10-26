@@ -10,6 +10,8 @@ let gMarkers = [];
 // The current image shown on the canvas.
 let gCurrentImage;
 
+let uuid = crypto.randomUUID();
+
 // Let's fetch the IIIF manifest from the vaticana website.
 fetch("manifest.json")
 .then(r => {
@@ -222,7 +224,7 @@ function zoneDone() {
 }
 
 function teiGeneratorZoneId() {
-  return teiGeneratorPageId() + "_" + crypto.randomUUID();
+  return teiGeneratorPageId() + "_" + uuid;
 }
 
 function teiGeneratorPageId() {
